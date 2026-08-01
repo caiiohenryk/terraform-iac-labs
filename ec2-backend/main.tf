@@ -19,7 +19,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_security_group" "backend_sg" {
-  name        = "backend-ec2-sg-${var.environment}"
+  name_prefix = "backend-ec2-sg-${var.environment}-"
   description = "Security group para backend EC2"
 
   ingress {
@@ -52,8 +52,8 @@ resource "aws_security_group" "backend_sg" {
 }
 
 resource "aws_key_pair" "backend_key" {
-  key_name   = "backend-ec2-key-${var.environment}"
-  public_key = var.ssh_public_key
+  key_name_prefix = "backend-ec2-key-${var.environment}-"
+  public_key      = var.ssh_public_key
 }
 
 resource "aws_instance" "backend_server" {
